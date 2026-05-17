@@ -81,7 +81,7 @@ joblib
 **Download the dataset** from Kaggle:
 [X Education Lead Scoring Dataset](https://www.kaggle.com/datasets/lakshmikalyan/lead-scoring-x-online-education)
 
-Rename the file to `leads.csv` and place it at `data/leads.csv`.
+Or you can simply get it from the Raw Folder.
 
 ---
 
