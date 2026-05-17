@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lead Scoring System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-dot"></div>
+        <span>Lead Scoring System</span>
+      </div>
+      <p class="header-sub">AI-Powered · MLP Neural Network · 6 Features</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+
+      <!-- ── LEFT: Form ─────────────────────────────────────────────────── -->
+      <div class="card form-card">
+        <h2>Score a Lead</h2>
+        <p class="card-sub">Enter what you know about the lead. The AI will predict their likelihood of converting.</p>
+
+        <form id="leadForm">
+
+          <div class="row-2">
+            <div class="field">
+              <label for="total_visits">Total Website Visits</label>
+              <input type="number" id="total_visits" min="0" max="200" placeholder="e.g. 5" required>
+              <span class="hint">How many times they visited</span>
+            </div>
+            <div class="field">
+              <label for="time_on_site">Time on Website (sec)</label>
+              <input type="number" id="time_on_site" min="0" max="5000" placeholder="e.g. 45" required>
+              <span class="hint">Total seconds spent browsing</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="page_views">Page Views per Visit</label>
+            <input type="number" id="page_views" min="0" max="50" step="0.1" placeholder="e.g. 3.5" required>
+            <span class="hint">Average pages viewed per session</span>
+          </div>
+
+          <div class="field">
+            <label for="lead_source">Lead Source</label>
+            <select id="lead_source" required>
+              <option value="" disabled selected>Where did they come from?</option>
+              <option>Google</option>
+              <option>Direct Traffic</option>
+              <option>Organic Search</option>
+              <option>Olark Chat</option>
+              <option>Reference</option>
+              <option>Social Media</option>
+              <option>Email</option>
+              <option>WeLearn</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="last_activity">Last Activity</label>
+            <select id="last_activity" required>
+              <option value="" disabled selected>What did they do last?</option>
+              <option>SMS Sent</option>
+              <option>Olark Chat Conversation</option>
+              <option>Page Visited on Website</option>
+              <option>Email Link Clicked</option>
+              <option>Form Submitted on Website</option>
+              <option>Had a Phone Conversation</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="occupation">Occupation</label>
+            <select id="occupation" required>
+              <option value="" disabled selected>What do they do?</option>
+              <option>Unemployed</option>
+              <option>Student</option>
+              <option>Working Professional</option>
+              <option>Businessman</option>
+              <option>Housewife</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <button type="submit" id="submitBtn">
+            <span id="btnText">Predict Conversion Score</span>
+            <span id="btnLoader" class="loader hidden"></span>
+          </button>
+
+        </form>
+      </div>
+
+      <!-- ── RIGHT: Result ──────────────────────────────────────────────── -->
+      <div class="card result-card">
+
+        <div id="emptyState">
+          <div class="empty-icon">⚡</div>
+          <h3>Score will appear here</h3>
+          <p>Fill in the form and click the button to get a conversion probability.</p>
+        </div>
+
+        <div id="resultDisplay" class="hidden">
+          <p class="result-label-top">Conversion Probability</p>
+
+          <div class="score-ring-wrapper">
+            <svg class="score-ring" viewBox="0 0 120 120">
+              <circle class="ring-bg"   cx="60" cy="60" r="50"/>
+              <circle class="ring-fill" cx="60" cy="60" r="50"
+                      id="ringFill"
+                      stroke-dasharray="314"
+                      stroke-dashoffset="314"/>
+            </svg>
+            <div class="score-center">
+              <span class="score-number" id="scoreNumber">0</span><span class="score-pct">%</span>
+            </div>
+          </div>
+
+          <div class="label-badge" id="labelBadge">—</div>
+
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <span>Model</span>
+              <span class="val">MLP (16, 8)</span>
+            </div>
+            <div class="breakdown-row">
+              <span>Algorithm</span>
+              <span class="val">Neural Network</span>
+            </div>
+            <div class="breakdown-row">
+              <span>Features used</span>
+              <span class="val">6 + 2 engineered</span>
+            </div>
+          </div>
+
+          <button class="btn-reset" onclick="resetForm()">Score Another Lead</button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
